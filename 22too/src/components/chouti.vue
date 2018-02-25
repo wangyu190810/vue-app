@@ -18,19 +18,21 @@
           </div>
           
       </div>
-      <button v-on:click="show_comments">
-        <div v-if="show_comments_flag">
+      
+      <button v-on:click="show_comments(chouti_data.id)">
+        <div v-if="show_comments_flag[chouti_data.id]">
           
             关闭评论
         </div>
         <div v-else>
-              展示评论
+        展示评论
         </div>
+         
       </button>
-      <div v-if="show_comments_flag">
+      <div v-if="show_comments_flag[chouti_data.id]==true">
         <div v-for ="comments in chouti_data.comments">
           <p>{{comments.nick}}
-            {{comments.createTime}}
+            发表时间:{{timestamp_to_date(comments.createTime)}}
           </p>
           {{comments.content}}
           {{comments.ups}}
@@ -48,7 +50,9 @@ export default {
   data() {
     return {
       chouti_lists: [],
-      show_comments_flag:false,
+      show_comments_flag:{
+      },
+      init_flag:false,
     };
   },
   methods: {
@@ -64,12 +68,24 @@ export default {
         year + " " + month + " " + date + " " + hour + ":" + min + ":" + sec;
       return time;
     },
-    show_comments:function(){
-        if (this.show_comments_flag == false){
-          this.show_comments_flag = true
+    show_comments:function(chouti_id){
+        // console.log(""+chouti_id)
+        // chouti_id = ""+chouti_id
+        // this.show_comments_flag[chouti_id] = true
+        var falg; 
+        if (this.show_comments_flag[chouti_id] == false){
+           falg = true
+        }else if (this.show_comments_flag[chouti_id] == undefined){
+          falg = true
         }else{
-          this.show_comments_flag = false
+          falg = false
         }
+        var data = this.show_comments_flag[chouti_id] = falg
+
+        this.show_comments_flag = Object.assign({},this.show_comments_flag,data)
+        // this.$set(this.show_comments_flag,chouti_id,falg)
+        // console.log(this.show_comments_flag[chouti_id])
+        // console.log(this.show_comments_flag)
     }
   },
   mounted: function() {
@@ -88,7 +104,12 @@ export default {
           // 这里是处理正确的回调
           console.log(response);
           this.chouti_lists = response.body;
-
+          if (this.init_flag==false){
+            this.chouti_lists.forEach(data => {
+                this.show_comments_flag[data.id] = false
+            });
+            this.init_flag==true
+          }
           // this.articles = response.data["subjects"] 也可以
         },
         function(response) {
