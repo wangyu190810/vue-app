@@ -31,11 +31,24 @@
       </button>
       <div v-if="show_comments_flag[chouti_data.id]==true">
         <div v-for ="comments in chouti_data.comments">
-          <p>{{comments.nick}}
-            发表时间:{{timestamp_to_date(comments.createTime)}}
+         <div id = "comments">
+           <div id = "username">
+          {{comments.nick}}
+           </div>
+              <div  id = "createtime">
+                发表时间:{{timestamp_to_date(comments.createTime)}}
+              
+                <div id = 'up'>
+                    {{comments.ups}}
+
+                </div>
+              </div>
+             
+            
           </p>
           {{comments.content}}
-          {{comments.ups}}
+          
+        </div>
         </div>
       </div>
     </div>
@@ -157,15 +170,20 @@ a {
 }
 #title {
   text-align: center;
-  background-color: #2fc9dd;
+  background-color: #ceb3c9;
 }
 #createtime {
   text-align: center;
-  background-color: #12c9dd;
+  background-color: #ac42ac;
+  color: #381111
+}
+#up{
+  /* text-align: center; */
+  background-color: #ff0000;
 }
 #origurl {
   text-align: center;
-  background-color: #12591d;
+  background-color: #804000;
 }
 #content {
   /* position:absolute; */
@@ -175,7 +193,17 @@ a {
   position:relative;
   left:40%
 }
-.comments {
+
+#username{
+  text-align: center;
+  background-color: #ff8000;
+}
+
+#comments {
+  right: 400px;
+  width: 300px;
+  position:relative;
+  left:40%
 }
 </style>
 
