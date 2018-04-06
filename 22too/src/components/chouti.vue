@@ -37,17 +37,15 @@
            </div>
               <div  id = "createtime">
                 发表时间:{{timestamp_to_date(comments.createTime)}}
-              
-                <div id = 'up'>
+                <div id = "up">
                     {{comments.ups}}
-
                 </div>
               </div>
              
-            
+
+          {{comments.content}}        
           </p>
-          {{comments.content}}
-          
+
         </div>
         </div>
       </div>
@@ -166,24 +164,24 @@ a {
   position: absolute;
   right: 100px;
   width: 300px;
-  background-color: #b0e0e6;
+  background-color: #ffff80;
 }
 #title {
   text-align: center;
-  background-color: #ceb3c9;
+  background-color: #f1f0dc;
 }
 #createtime {
   text-align: center;
-  background-color: #ac42ac;
+  background-color:#f7f5f5;
   color: #381111
 }
 #up{
   /* text-align: center; */
-  background-color: #ff0000;
+  background-color: #f3c009;
 }
 #origurl {
   text-align: center;
-  background-color: #804000;
+  background-color: #c7c5c2;
 }
 #content {
   /* position:absolute; */
@@ -196,7 +194,7 @@ a {
 
 #username{
   text-align: center;
-  background-color: #ff8000;
+  background-color: #9e9c9a;
 }
 
 #comments {
